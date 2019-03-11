@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>homework1</title>
+    <style>
+        #news{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <h1>毕业生信息</h1>
+    <form id="stunews" method="GET" action="">
+        <fieldset>
+            <legend id="news">
+                学生信息
+            </legend>
+            姓&nbsp;&nbsp;名 
+            <input type="text" name="name1" autofocus="autofocus" placeholder="请输入姓名" required/> 
+            <span id="news">*</span>
+            <br/>
+            学&nbsp;&nbsp;号 
+            <input type="text" name="name1" placeholder="请输入学号" required/>
+            <span id="news">*</span>
+            <br/>
+            手&nbsp;&nbsp;机 
+            <input type="tel" name="tel1" placeholder="请输入手机号" required/>
+            <span id="news">*</span>
+            <br/>
+            邮&nbsp;&nbsp;箱 
+            <input type="email" name="email1" placeholder="请输入邮箱地址" required/>
+            <span id="news">*</span>
+        </fieldset>
+        <br/>
+        <fieldset>
+            <legend id="news">
+                录取情况
+            </legend>
+            录取学校
+            <input type="search" name="seal" list="names"/>
+            <datalist id="names">
+                <option>河北师范大学</option>
+                <option>河北科技大学</option>
+            </datalist>
+            <br/>
+            入学成绩 
+            <input type="number" name="num"/>
+            <br/>
+            入学时间 
+            <input type="date" name="date1"/>
+        </fieldset>
+        <br/>
+        <input type="submit" value="提交"/>
+    </form>
+</body>
+</html>
