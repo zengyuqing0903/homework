@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #search{
+        width: 220px;
+        height: 45px;
+        outline: none;
+        border-color: sandybrown;
+    }
+    #btn{
+        height: 35px;
+        width: 125px;
+    }
+    #history{
+        width:370px;
+        height: 200px;
+    }
+    #tar{
+        background-color:#9e9e9e9c;
+        float: left;
+        margin-right: 10px;
+        margin-bottom: 0px;
+    }
+    #delhis{
+        position: absolute;
+        left: 355px;
+        top: 76px; 
+        display: none;
+    }
+</style>
+<body>
+    <input type="search" placeholder="请输入想查找的商品" id="search" autofocus="autofocus"/>
+    <button id="btn" onclick="saveStorage()">搜索</button><br/>
+    <div>最近搜索</div> 
+    <div id="history"></div>
+    <button id="delhis" onclick="clearStorage()">X</button>
+</body>
+<script>
+    var hory = document.getElementById('history');
+    var search = document.getElementById("search");
+    var btn = document.getElementById("btn");
+    var delhis = document.getElementById('delhis');
+
+    if(!window.localStorage){
+        alert("浏览器不支持localStorage");
+    }else{
+        window.onload = function(){
+            readStorage();
+        }
+    }
+    // 添加数据
+    function saveStorage(){
+        var pi = document.createElement('p');
+        hory.appendChild(pi);
+        hory.insertBefore(pi,hory.children[0]);
+        pi.id = 'tar';
+        var data = search.value;
+        var time = new Date().getTime();
+        localStorage.setItem(time, data);
+        var value = localStorage.getItem(time);
+        pi.innerHTML = value;    
+        delhis.style.display = 'block';   
+    }
+    //若localStorage中有数据，则在页面加载完时读取localStorage
+    function readStorage(){
+        for(var j =0;j<localStorage.length;j++){
+            var pi = document.createElement('p');
+            hory.appendChild(pi);
+            pi.id = 'tar';
+            pi.innerHTML += localStorage.getItem(localStorage.key(j));
+        }
+    }
+    // 删除最近搜索
+    function clearStorage(){
+        localStorage.clear();
+        hory.innerHTML = '';
+        delhis.style.display = 'none';
+    }       
+</script>
+</html>
