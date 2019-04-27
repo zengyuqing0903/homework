@@ -65,7 +65,6 @@
         canvas2.onmousemove = null;  
         // 判断是否完成刮奖
         var strData = context2.getImageData(0,0,200,100);
-        console.log(strData.data);
         var sdata = strData.data;
         var sum = 0;//透明点个数
         for(var i=0;i<sdata.length;i+=4){
