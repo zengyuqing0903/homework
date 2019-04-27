@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #canvas1 {
+        position: absolute;
+        top:0px;
+        left:0px;
+    }
+    #canvas2{
+        position: absolute;
+        top:0px;
+        left:0px;
+        border: 1px solid red;
+    }
+</style>
+<body>
+    <canvas id="canvas1" width="200" height="100">
+        您的浏览器不支持canvas元素，请更换或更新浏览器!
+    </canvas>
+    <canvas id="canvas2" width="200" height="100">
+        您的浏览器不支持canvas元素，请更换或更新浏览器!
+	</canvas>
+</body>
+<script>
+    var canvas1 = document.getElementById("canvas1");
+    var context1 = canvas1.getContext("2d");
+    var str = ['一等奖','谢谢惠顾','二等奖','三等奖'];
+    var text = Math.floor(Math.random()*str.length);
+    context1.font = "30px 隶书";
+    context1.fillStyle = "red";
+    context1.fillText(str[text], 50,55, 200);
+
+
+    var canvas2 = document.getElementById("canvas2");
+    var context2 = canvas2.getContext("2d");
+    // 将 canvas 画满一个遮罩层
+    context2.beginPath();
+    context2.fillStyle = '#d1d1d1';
+    context2.rect(0,0,200,100);
+    context2.fill();
+    context2.closePath();
+    // 启用 globalCompositeOperation
+    context2.globalCompositeOperation = 'destination-out';
+    // 画圆时透明遮罩层
+    // 鼠标按下，移动
+    canvas2.onmousedown = function(){
+        canvas2.onmousemove = function(event){
+            // 获取鼠标位置
+            var x = event.clientX;
+            var y = event.clientY;
+            context2.beginPath();
+            context2.arc(x,y,10,0,2*Math.PI);
+            context2.fill();
+            context2.closePath();
+        }       
+    }
+    // 鼠标抬起
+    canvas2.onmouseup = function() {
+        canvas2.onmousemove = null;  
+        // 判断是否完成刮奖
+        var strData = context2.getImageData(0,0,200,100);
+        console.log(strData.data);
+        var sdata = strData.data;
+        var sum = 0;//透明点个数
+        for(var i=0;i<sdata.length;i+=4){
+            var alpha = sdata[i+3];
+            if(alpha==0){
+                sum++;
+            }
+        }
+        if(sum >= (0.85*sdata.length/4)){
+            context2.fillRect(0,0,200,100);
+            context2.fill();
+        }
+    }
+</script>
+</html>
