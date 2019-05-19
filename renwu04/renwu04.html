@@ -30,16 +30,7 @@
         img{
             width: 400px;
             height: 300px;
-            transition: transform 3s;
-        }
-        #shade{
-            width: 400px;
-            height: 300px;
-            position: absolute;
-            top:0px;
-            left: 0px;
-            background: rgba(255,255,255,0.4);
-            display: none;
+            transition: transform 2s ,opacity 1s;
         }
         #pic{
             background: #ff6a00;
@@ -51,7 +42,7 @@
             color: #fff;
             text-align: center;
             line-height: 30px;
-            transition: transform 3s;            
+            transition: transform 2s;            
         }
         #time{
             width: 60px;
@@ -70,7 +61,7 @@
             position: absolute;
             top:300px;
             left: 0px;
-            transition: transform 3s;            
+            transition: transform 2s;            
         }
         #box2{
             height: 100px;
@@ -112,9 +103,7 @@
         }
         #box:hover #imgs img{
             transform: scale(1.5,1.5); 
-        }
-        #box:hover #shade {
-            display: block;
+            opacity: 0.3;
         }
         #box:hover #middle{
             opacity: 1;       
@@ -130,7 +119,6 @@
 <body>
     <div id="box">
         <div id="imgs"><img src="zhanqiao.jpg" ></div>
-        <div id="shade"></div>
         <div id="time">
             <span>15</span>
             </br>
